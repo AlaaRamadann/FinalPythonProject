@@ -1,2 +1,10 @@
-ID,Name,Phone,Address,Email,Position,Salary
-1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,20000.0
+ID,Name,Phone,Address,Email,Position,Salary
+1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,25000.0
+1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,50000.0
+1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,50000.0
+2,menna,0158966666,benisuef,menna@gmail.com,hr,250000.0
+1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,50000.0
+2,menna,0158966666,benisuef,menna@gmail.com,hr,250000.0
+3,mohamed,0155599786,cairo,mohamed@gmail.com,manager,10000.0
+1,alaa,01152965312,benisuef,alaa@gmail.com,data scientist,50000.0
+2,menna,0158966666,benisuef,menna@gmail.com,hr,250000.0

@@ -6,15 +6,20 @@ class EmployeeManager:
     
       def load_from_csv(self,filename="employees.csv"):
             try:
-                with open(filename, "r", newline="") as file:
-                    reader = csv.reader(file)
-                    next(reader)  # Skip header row
-
-                    for row in reader:
-                        # Create employee objects from the data in CSV
-                        id, name, phone, address, email, position, salary = row
-                        new_employee = Employee(int(id), name, phone, address, email, position, float(salary))
-                        self.employees.append(new_employee)
+                 with open(filename, "r", newline="") as file:
+                      reader = csv.reader(file)
+                      next(reader)  # Skip the header row
+                 for row in reader:
+                    if len(row) == 7:  # Ensure the row has 7 columns
+                        try:
+                            # Create employee objects from the data in CSV
+                            id, name, phone, address, email, position, salary = row
+                            new_employee = Employee(int(id), name, phone, address, email, position, float(salary))
+                            self.employees.append(new_employee)
+                        except ValueError:
+                            print(f"Skipping invalid data row: {row}")
+                    else:
+                        print(f"Skipping incomplete or empty row: {row}")
 
             except FileNotFoundError:
                     print(f"The file {filename} was not found. Starting with an empty list of employees.")
@@ -26,6 +31,34 @@ class EmployeeManager:
 
             self.employees=[]
             self.load_from_csv() 
+
+      
+      def List_employees(self):
+
+            #check if list is empty
+            if not self.employees:
+                  print("no employees found")
+
+            else:
+                  for emp in self.employees:
+                        print (emp)     
+
+
+      def save_to_csv(self):
+            try:
+                  with open("employees.csv",mode="w", newline="") as file:
+
+                        writer=csv.writer(file)        
+                        #write file  headers
+                        if file.tell() == 0: 
+                         writer.writerow(["ID", "Name", "Phone", "Address", "Email", "Position", "Salary"])
+                        #write each item in list as a row in the csv file
+                        for emp in self.employees:
+                              writer.writerow([emp.Id,emp.Name,emp.Phone,emp.Address,emp.Email,emp.Position,emp.Salary]) 
+                  print("Data saved successfully to employees.csv.")
+
+            except Exception as e:
+                 print(f"An error occurred while saving to csv file: {e}")
 
       def Add_Employee(self):
 
@@ -54,33 +87,7 @@ class EmployeeManager:
             except Exception as e:
 
                   print(f"An unexpected error occurred: {e}")      
-
-      def List_employees(self):
-
-            #check if list is empty
-            if not self.employees:
-                  print("no employees found")
-
-            else:
-                  for emp in self.employees:
-                        print (emp)     
-
-
-      def save_to_csv(self):
-            try:
-                  with open("employees.csv",mode="a", newline="") as file:
-
-                        writer=csv.writer(file)        
-                        #write file  headers
-                        if file.tell() == 0: 
-                         writer.writerow(["ID", "Name", "Phone", "Address", "Email", "Position", "Salary"])
-                        #write each item in list as a row in the csv file
-                        for emp in self.employees:
-                              writer.writerow([emp.Id,emp.Name,emp.Phone,emp.Address,emp.Email,emp.Position,emp.Salary]) 
-                  print("Data saved successfully to employees.csv.")
-
-            except Exception as e:
-                 print(f"An error occurred while saving to csv file: {e}")
+         
 
       def Delete_Employee(self):
             try:
